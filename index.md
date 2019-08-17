@@ -14,7 +14,7 @@
 ### <a name="php-base"></a>PHPの基本  
 
 phpファイルの始まりは  
-```Php
+```php
 <?php
 ```
 で開始します。  
@@ -28,7 +28,7 @@ phpファイルの始まりは
 
 変数とは何かを入れるための箱と置くことができます。  
 PHPでの変数は  
-```Php
+```php
 <?php
 $hoge = 1;
 $huga = "aaa";
@@ -37,7 +37,7 @@ $huga = "aaa";
 
 PHPでは関数を定義して使うことができます。  
 関数の定義には function を利用します。  
-```Php
+```php
 <?php
 function 関数名($引数){
     $引数;
@@ -55,7 +55,7 @@ hoge("hoge!!");
 先ほど出てきた `"hoge!!"`　が引数に当たります。  
 つまり関数 `hoge("hoge!!");`　を実行すると `hoge!!` と表示されるわけです。  
 引数は複数渡すことができます。  
-```Php
+```php
 <?php
 function hoge2($a,$b){
     echo $a,$b;
