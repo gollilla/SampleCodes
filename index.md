@@ -8,7 +8,7 @@
 ## 目次
 - [PHPの基本](#php-base)
 - [PHPの応用](#php-app)
-___  
+---
 
 ### <a name="php-base"></a>PHPの基本  
 
