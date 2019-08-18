@@ -8,6 +8,7 @@
 ## <a name="tab-con"></a>目次
 - [PHPの基本](#php-base)
 - [PHPの応用](#php-app)
+- [よくあるエラーと解決方法](#err-res)
 
 ---
 
@@ -76,4 +77,19 @@ PHPの型は
 - Float 浮動小数点数
 - Boolean 論理型
 
-等があります。
+等があります。  
+
+
+### <a name="err-res"></a>よくあるエラーと解決方法  
+
+#### エラー文
+```
+[Server thread/CRITICAL]: ParseError: "syntax error, unexpected end of file, expecting function (T_FUNCTION) or const (T_CONST)" (EXCEPTION) in "plugins/~/src/soradore/~/main" at line ○○
+
+```
+エラー原因 : }が閉じ忘れていた  
+
+解決方法 :  
+ {} のペアを確認する。  
+ インデントを行う。  
+ 高機能テキストエディタを使うと自動でつけてくれるものもあるので、活用しましょう。
