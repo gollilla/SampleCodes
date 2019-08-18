@@ -5,7 +5,7 @@
   - anyone
   - oneone
 
-## 目次
+## <a name="tab-con"></a>目次
 - [PHPの基本](#php-base)
 - [PHPの応用](#php-app)
 
@@ -62,6 +62,8 @@ function hoge2($a,$b){
 }
 hoge("hoge", "huga");
 ```  
+
+:arrow_backward:[目次に戻る](#tab-con)  
 
 ### <a name="php-app"></a>PHPの応用  
 
