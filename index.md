@@ -63,7 +63,7 @@ function hoge2($a,$b){
 hoge("hoge", "huga");
 ```  
 
-:arrow_backward:[目次に戻る](#tab-con)  
+<=[目次に戻る](#tab-con)  
 
 ### <a name="php-app"></a>PHPの応用  
 
