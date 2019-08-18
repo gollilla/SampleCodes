@@ -73,7 +73,7 @@ PHPの型は
 
 - Array 配列
 - String 文字列
-- Int 整数
+- Integer 整数
 - Float 浮動小数点数
 - Boolean 論理型
 
