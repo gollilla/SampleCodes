@@ -5,4 +5,4 @@ pmmp sample code
 
 プルリク送ってください。
 
-[公開はこちら](https://soradore.github.io/SampleCodes)
+[公開はこちら](https://soradore.github.io/SampleCodes){:target="_blank"}
