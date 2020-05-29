@@ -165,7 +165,7 @@ $player->getName();
 #### エンティティが追いかけてくるコード
 ```php
 (Entity) $entity->lookAt($player);
-$moveX = sin(-deg2rad($this->yaw)) * 0.5; //0.5はスピード
-$moveZ = cos(-deg2rad($this->yaw)) * 0.5;
+$moveX = sin(-deg2rad($entity->yaw)) * 0.5; //0.5はスピード
+$moveZ = cos(-deg2rad($entity->yaw)) * 0.5;
 $entity->move($moveX, 0, $moveZ);
 ```
