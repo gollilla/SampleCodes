@@ -11,6 +11,7 @@
 - [PHPの基本](#php-base)
 - [PHPの応用](#php-app)
 - [よくあるエラーと解決方法](#err-res)
+- [プラグインのサンプルコード](#plugin-sample)
 
 ---
 
@@ -158,3 +159,13 @@ $player->getName();
 (NULL)->getName();
 ```
 となっていた場合、NULLなのに関数呼び出せないよ!!!ということでエラーが出てしまいます。
+
+### <a name="plugin-sample"></a>プラグインのサンプルコード
+
+#### エンティティが追いかけてくるコード
+```php
+(Entity) $entity->lookAt($player);
+$moveX = sin(-deg2rad($this->yaw)) * 0.5; //0.5はスピード
+$moveZ = cos(-deg2rad($this->yaw)) * 0.5;
+$entity->move($moveX, 0, $moveZ);
+```
