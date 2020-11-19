@@ -169,3 +169,11 @@ $moveX = sin(-deg2rad($entity->yaw)) * 0.5; //0.5はスピード
 $moveZ = cos(-deg2rad($entity->yaw)) * 0.5;
 $entity->move($moveX, 0, $moveZ);
 ```
+
+<script src="https://utteranc.es/client.js"
+        repo="soradore/SampleCodes"
+        issue-term="pathname"
+        theme="github-dark"
+        crossorigin="anonymous"
+        async>
+</script>
