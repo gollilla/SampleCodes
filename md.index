@@ -71,6 +71,7 @@ hoge("hoge", "huga");
 
 ### <a name="php-app"></a>PHPの応用  
 
+#### 配列
 ほかのプログラミング言語と同様にPHPにも型と呼ばれるものがあります。  
 PHPの型は  
 
@@ -122,7 +123,77 @@ $team['blue'][] = $player2;
 ```
 実際にはプラグインではクラス内で使うことが多いので配列はメンバー変数で扱われます。  
 
+#### クラス
+オブジェクト指向プログラミング言語であるPHPではclassを定義することができます。  
+classは何等かの目的のために変数や関数をまとめたものです。 
 
+classの定義方法
+```php
+
+class クラス名 {
+
+}
+
+```
+という風に書きます。
+
+classの例
+```php
+class Test{
+    
+    public function getName(){
+        return "soradore";
+    }
+}
+```
+
+classを実際に使用する場合には new を使用します。  
+classをnewすることで __インスタンス__化します。  
+```php
+
+class Test{
+    public function getName(){
+        return "soradore";
+    }
+}
+
+$testClass = new Test();
+echo $testClass->getName(); // soradore　と表示されます。
+```
+
+classには特別な名前の関数を定義することができます。
+コンストラクタはインスタンス化に際してインスタンスに変数を渡したいときに使用できます。
+
+コンストラクタの例  
+```php
+class Test{
+ 
+    public $name, $number;
+    public function __construct($name, $number){ //コンストラクタ
+        $this->name = $name; //public $name で定義したメンバ変数に コンストラクタで受け取った $nameを受け取る
+        $this->number = $number; //public $number で定義したメンバ変数に コンストラクタで受け取った $numberを受け取る
+    }
+    
+    public function getName(){
+        return $this->name;
+    }
+    
+    public function getNumber(){
+        return $this->number;
+    }
+}
+
+$testClass = new Test("soradore", 1111);
+/*                    ↑コンストラクタに値を渡す */
+```
+class内部で自分のインスタンスを指すときには $this を使用します。  
+
+```php
+$this->変数名;
+```
+でクラス内の変数であるメンバ変数にアクセスできます。  
+  
+  
 ### <a name="err-res"></a>よくあるエラーと解決方法  
 
 #### ケース1
