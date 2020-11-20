@@ -4,6 +4,8 @@
   - [soradore](https://twitter.com/soradore_)
   - anyone
   - oneone
+  
+[コメント](#comment)
 
 ## <a name="tab-con"></a>目次
 - [PHPの基本](#php-base)
@@ -168,3 +170,5 @@ $moveZ = cos(-deg2rad($entity->yaw)) * 0.5;
 $entity->move($moveX, 0, $moveZ);
 ```
 
+
+<a name="comment"></a>
