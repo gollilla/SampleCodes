@@ -162,6 +162,21 @@ $player->getName();
 
 ### <a name="plugin-sample"></a>プラグインのサンプルコード
 
+#### プレイヤー関連
+```php
+use pocketmine\Server;
+
+$player = Server::getInstance()->getPlayer("名前");
+
+$name = $player->getName(); //プレイヤーの名前取得
+
+$nametag = $player->getNameTag(); //プレイヤーの頭上の名前を取得
+$player->setNameTag("wwww"); //プレイヤーの頭上の名前を設定
+
+$displayname = $player->getDisplayName(); //プレイヤーリスト(ポーズ画面等にでる)に表示される名前 
+$player->setDisplayName("wwww"); //↑を設定
+```
+
 #### エンティティが追いかけてくるコード
 ```php
 (Entity) $entity->lookAt($player);
