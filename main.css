@@ -1,4 +1,5 @@
 pre {
     background-color: #fff8e7;
     padding: 10px 5px;
+    overflow: scroll;
 }
