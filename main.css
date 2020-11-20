@@ -8,4 +8,5 @@ code {
     overflow: scroll;
     -webkit-overflow-scrolling: touch;
     overflow-scrolling: touch;
+    white-space: nowrap;
 }
