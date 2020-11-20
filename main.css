@@ -6,4 +6,5 @@ pre {
     white-space: pre;
     -webkit-overflow-scrolling: touch;
     overflow-scrolling: touch;
+    font-size: 17px;
 }
