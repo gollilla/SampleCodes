@@ -6,4 +6,6 @@ pmmp sample code
 
 プルリク送ってください。
 
+  md.index を編集
+
 <a href="https://soradore.github.io/SampleCodes" target="_blank">公開はこちら</a>
