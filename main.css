@@ -1,12 +1,9 @@
 pre {
     background-color: #fff8e7;
     padding: 10px 5px;
-}
-
-code {
-    width: 100%;
-    overflow: scroll;
+    overflow: auto;
+    word-wrap: normal;
+    white-space: pre;
     -webkit-overflow-scrolling: touch;
     overflow-scrolling: touch;
-    white-space: nowrap;
 }
