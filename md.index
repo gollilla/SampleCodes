@@ -2,7 +2,7 @@
 
 - Authors  
   - [soradore](https://twitter.com/soradore_)
-  - anyone
+  - [boymelancholy](https://twitter.com/b0ymelancholy)
   - oneone
   
 [コメント](#comment)
@@ -237,24 +237,215 @@ $player->getName();
 ```php
 use pocketmine\Server;
 
+// プレイヤーの取得
 $player = Server::getInstance()->getPlayer("名前");
 
-$name = $player->getName(); //プレイヤーの名前取得
+// プレイヤーの名前取得
+$name = $player->getName();
 
-$nametag = $player->getNameTag(); //プレイヤーの頭上の名前を取得
-$player->setNameTag("wwww"); //プレイヤーの頭上の名前を設定
+// プレイヤーの頭上の名前を取得
+$nametag = $player->getNameTag();
 
-$displayname = $player->getDisplayName(); //プレイヤーリスト(ポーズ画面等にでる)に表示される名前 
-$player->setDisplayName("wwww"); //↑を設定
+// プレイヤーの頭上の名前を設定
+$player->setNameTag("wwww");
+
+// プレイヤーリスト(ポーズ画面等にでる)に表示される名前
+$displayname = $player->getDisplayName();
+
+// ↑を設定
+$player->setDisplayName("wwww");
+
+// 方向 (0=南,1=西,2=北,3=東) 取得
+$player->getDirection();
+
+// 位置の取得
+$pos = $player->getPosition();
+$x = $pos->x; // X座標
+$y = $pos->y; // Y座標
+$z = $pos->z; // Z座標
+
+// OP権限を付与する
+$player->setOp(true);
+
+// OP権限の剥奪
+$player->setOp(false);
+
+// ホワイトリストに追加
+$player->setWhitelisted(true);
+
+// ホワイトリストから削除
+$player->setWhitelisted(false);
+
+// オートジャンプを可能にする
+$player->setAutoJump(true);
+
+// ゲームモード変更
+$player->setGamemode("数値");
+// 0 = サバイバル, 1 = クリエイティブ, 2 = アドベンチャー, 3 = スペクテーター
+
+// サバイバルでも飛べるようにする
+$player->setAllowFlight(true);
+
+// $amount秒 燃やします
+$player->setOnFire($amount);
+
+// プレイヤーを殺す
+$player->kill();
+
+// テレポート
+use pocketmine\math\Vector3;
+use pocketmine\level\Position;
+use pocketmine\level\Location;
+
+$pos = new Vector3(/*X座標*/, /*Y座標*/, /*Z座標*/); // 座標のみ
+$pos = new Position(/*X座標*/, /*Y座標*/, /*Z座標*/, /*Level*/); // ワールドも考慮
+$pos = new Location(/*X座標*/, /*Y座標*/, /*Z座標*/, /*Yaw*/, /*Pitch*/, /*Level*/); // 体頭の向きも考慮
+$player->teleport($pos);
+
+// ジャンプさせる
+$motionJ = new Vector3(0,0,0); // 初期座標
+$jump = 0.8; // 高さ
+$motionJ->y = $jump;
+$player->setMotion($motionJ);
+
+// IP BAN
+$this>getServer()->getIPBans()->addBan("IPアドレス", "理由", null, "BANした人の名前");
+
+// IP BAN解除
+$this>getServer()->getIPBans()->remove($player);
+
+// 名前BAN
+$this>getServer()->getNameBans()->addBan($player, "理由", null, "BANした人の名前");
+
+// 名前BAN解除
+$this>getServer()->getNameBans()->remove($player);
+
+// Kick
+$player->kick("理由", true); // trueをfalseにすると"Kicked by Admin"が消えます
+
+// Effect付与
+use pocketmine\entity\Effect;
+use pocketmine\entity\EffectInstance;
+
+$effect = Effect::getEffect(/*EffectID*/);
+$duration = 100; // 時間
+$amplification = 1; // 効果度合
+$visible = false; // エフェクトのモヤモヤが見えるかどうか
+$instance = new EffectInstance($effect, $duration, $amplification, $visible);
+$player->addEffect($instance);
+
+// ()に入っているIDのエフェクトを持っているか
+if ($player->hasEffect(1)) {
+    //持っている
+} else {
+    //持っていない
+}
 ```
 
-#### エンティティが追いかけてくるコード
+#### エンティティ関係
 ```php
-(Entity) $entity->lookAt($player);
+// $entityはEntityオブジェクトであるとします。
+
+// エンティティが追いかけてくるコード
+$entity->lookAt($player);
 $moveX = sin(-deg2rad($entity->yaw)) * 0.5; //0.5はスピード
 $moveZ = cos(-deg2rad($entity->yaw)) * 0.5;
 $entity->move($moveX, 0, $moveZ);
+
+// 見ているブロックを取得
+$block = $entity->getTargetBlock(/*距離*/);
+
+// 大きさ変更
+$entity->setScale(/*0より大きい数値*/);
+
+// 操作不能、停止させる
+$entity->setImmobile(true);
+
+// ↑ 解除
+$entity->setImmobile(false);
 ```
 
+#### Config関係
+```php
+use pocketmine\utils\Config;
+
+// ResourcesフォルダからConfig保存
+$this->reloadConfig(); // Configファイルを再読み込み
+
+if(!file_exists($this->getDataFolder())){ //Configファイルを入れるフォルダがあるかを確認
+    @mkdir($this->getDataFolder(), 0744, true); // なければフォルダを作成
+}
+
+//何も書かれていないConfigの作成
+//$this->getDataFolder() はプラグインのパスを意味します
+new Config($this->getDataFolder() . "config.yml", Config::YAML);
+
+//キーが設定されているConfigの作成
+new Config($this->getDataFolder() . "config.yml", Config::YAML,
+    [
+        'test' => 'data',
+        'データ名(キー)' => '値'
+    ]
+);
+
+// Configの取得
+$this->config = new Config($this->getDataFolder() . "config.yml", Config::YAML);
+
+// Configの種類リスト
+new Config($this->getDataFolder() . "config.properties", Config::PROPERTIES);
+new Config($this->getDataFolder() . "config.cnf", Config::CNF);
+new Config($this->getDataFolder() . "config.json", Config::JSON);
+new Config($this->getDataFolder() . "config.yaml", Config::YAML);
+new Config($this->getDataFolder() . "config.serialize", Config::SERIALIZED);
+new Config($this->getDataFolder() . "config.enum", Config::ENUM);
+
+ // データ名から値を取得
+$this->config->get("データ名");
+
+// データをすべて取得
+$this->config->getAll();
+
+// Configから項目の有無確認
+if ($this->config->exists("データ名")) {
+    //ある場合
+} else {
+    //ない場合
+}
+
+// Configにデータをセット
+$this->config->set("データ名", "値"); // 値と名前を設定
+$this->config->save();
+
+// test という項目をコンフィグから消す場合
+$this->config->remove("test");
+$this->config->save(); // 保存
+
+// Config内の配列をマージする
+// 配列 test 内の 'a' を 'b' にする場合
+$data = $this->config->get("test"); // test項目を取得
+$data2 = array("a" => "b"); // マージする内容を設定
+$merge = array_merge($data, $data2) // マージする
+$this->config->set("test", $merge); // コンフィグにセット
+```
+
+#### Scheduler関係
+```php
+// $plugin は PluginBaseであるとします
+
+// クロージャ―タスクで簡易記述 (RepeatingTask)
+use pocketmine\scheduler\ClosureTask;
+
+$player; // プレイヤーオブジェクト
+$plugin->getScheduler()->scheduleRepeatingTask(
+    new ClosureTask(
+        function(int $currentTick) use($player): void {
+            // リピートする処理
+            // 例: メッセージ送信
+            $player->sendMessage("繰り返してます");
+        }
+    ),
+    1 * 20
+);
+```
 
 <a name="comment"></a>
