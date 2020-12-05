@@ -237,15 +237,109 @@ $player->getName();
 ```php
 use pocketmine\Server;
 
+// プレイヤーの取得
 $player = Server::getInstance()->getPlayer("名前");
 
-$name = $player->getName(); //プレイヤーの名前取得
+// プレイヤーの名前取得
+$name = $player->getName();
 
-$nametag = $player->getNameTag(); //プレイヤーの頭上の名前を取得
-$player->setNameTag("wwww"); //プレイヤーの頭上の名前を設定
+// プレイヤーの頭上の名前を取得
+$nametag = $player->getNameTag();
 
-$displayname = $player->getDisplayName(); //プレイヤーリスト(ポーズ画面等にでる)に表示される名前 
-$player->setDisplayName("wwww"); //↑を設定
+// プレイヤーの頭上の名前を設定
+$player->setNameTag("wwww");
+
+// プレイヤーリスト(ポーズ画面等にでる)に表示される名前
+$displayname = $player->getDisplayName();
+
+// ↑を設定
+$player->setDisplayName("wwww");
+
+// 方向 (0=南,1=西,2=北,3=東) 取得
+$player->getDirection();
+
+// 位置の取得
+$pos = $player->getPosition();
+$x = $pos->x; // X座標
+$y = $pos->y; // Y座標
+$z = $pos->z; // Z座標
+
+// OP権限を付与する
+$player->setOp(true);
+
+// OP権限の剥奪
+$player->setOp(false);
+
+// ホワイトリストに追加
+$player->setWhitelisted(true);
+
+// ホワイトリストから削除
+$player->setWhitelisted(false);
+
+// オートジャンプを可能にする
+$player->setAutoJump(true);
+
+// ゲームモード変更
+$player->setGamemode("数値");
+// 0 = サバイバル, 1 = クリエイティブ, 2 = アドベンチャー, 3 = スペクテーター
+
+// サバイバルでも飛べるようにする
+$player->setAllowFlight(true);
+
+// $amount秒 燃やします
+$player->setOnFire($amount);
+
+// プレイヤーを殺す
+$player->kill();
+
+// テレポート
+use pocketmine\math\Vector3;
+use pocketmine\level\Position;
+use pocketmine\level\Location;
+
+$pos = new Vector3(/*X座標*/, /*Y座標*/, /*Z座標*/); // 座標のみ
+$pos = new Position(/*X座標*/, /*Y座標*/, /*Z座標*/, /*Level*/); // ワールドも考慮
+$pos = new Location(/*X座標*/, /*Y座標*/, /*Z座標*/, /*Yaw*/, /*Pitch*/, /*Level*/); // 体頭の向きも考慮
+$player->teleport($pos);
+
+// ジャンプさせる
+$motionJ = new Vector3(0,0,0); // 初期座標
+$jump = 0.8; // 高さ
+$motionJ->y = $jump;
+$player->setMotion($motionJ);
+
+// IP BAN
+$this>getServer()->getIPBans()->addBan("IPアドレス", "理由", null, "BANした人の名前");
+
+// IP BAN解除
+$this>getServer()->getIPBans()->remove($player);
+
+// 名前BAN
+$this>getServer()->getNameBans()->addBan($player, "理由", null, "BANした人の名前");
+
+// 名前BAN解除
+$this>getServer()->getNameBans()->remove($player);
+
+// Kick
+$player->kick("理由", true); // trueをfalseにすると"Kicked by Admin"が消えます
+
+// Effect付与
+use pocketmine\entity\Effect;
+use pocketmine\entity\EffectInstance;
+
+$effect = Effect::getEffect(/*EffectID*/);
+$duration = 100; // 時間
+$amplification = 1; // 効果度合
+$visible = false; // エフェクトのモヤモヤが見えるかどうか
+$instance = new EffectInstance($effect, $duration, $amplification, $visible);
+$player->addEffect($instance);
+
+// ()に入っているIDのエフェクトを持っているか
+if ($player->hasEffect(1)) {
+    //持っている
+} else {
+    //持っていない
+}
 ```
 
 #### エンティティが追いかけてくるコード
