@@ -365,5 +365,67 @@ $entity->setImmobile(true);
 $entity->setImmobile(false);
 ```
 
+#### Config関係
+```php
+use pocketmine\utils\Config;
+
+// ResourcesフォルダからConfig保存
+$this->reloadConfig(); // Configファイルを再読み込み
+
+if(!file_exists($this->getDataFolder())){ //Configファイルを入れるフォルダがあるかを確認
+    @mkdir($this->getDataFolder(), 0744, true); // なければフォルダを作成
+}
+
+//何も書かれていないConfigの作成
+//$this->getDataFolder() はプラグインのパスを意味します
+new Config($this->getDataFolder() . "config.yml", Config::YAML);
+
+//キーが設定されているConfigの作成
+new Config($this->getDataFolder() . "config.yml", Config::YAML,
+    [
+        'test' => 'data',
+        'データ名(キー)' => '値'
+    ]
+);
+
+// Configの取得
+$this->config = new Config($this->getDataFolder() . "config.yml", Config::YAML);
+
+// Configの種類リスト
+new Config($this->getDataFolder() . "config.properties", Config::PROPERTIES);
+new Config($this->getDataFolder() . "config.cnf", Config::CNF);
+new Config($this->getDataFolder() . "config.json", Config::JSON);
+new Config($this->getDataFolder() . "config.yaml", Config::YAML);
+new Config($this->getDataFolder() . "config.serialize", Config::SERIALIZED);
+new Config($this->getDataFolder() . "config.enum", Config::ENUM);
+
+ // データ名から値を取得
+$this->config->get("データ名");
+
+// データをすべて取得
+$this->config->getAll();
+
+// Configから項目の有無確認
+if ($this->config->exists("データ名")) {
+    //ある場合
+} else {
+    //ない場合
+}
+
+// Configにデータをセット
+$this->config->set("データ名", "値"); // 値と名前を設定
+$this->config->save();
+
+// test という項目をコンフィグから消す場合
+$this->config->remove("test");
+$this->config->save(); // 保存
+
+// Config内の配列をマージする
+// 配列 test 内の 'a' を 'b' にする場合
+$data = $this->config->get("test"); // test項目を取得
+$data2 = array("a" => "b"); // マージする内容を設定
+$merge = array_merge($data, $data2) // マージする
+$this->config->set("test", $merge); // コンフィグにセット
+```
 
 <a name="comment"></a>
