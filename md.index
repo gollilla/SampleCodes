@@ -428,4 +428,24 @@ $merge = array_merge($data, $data2) // マージする
 $this->config->set("test", $merge); // コンフィグにセット
 ```
 
+#### Scheduler関係
+```php
+// $plugin は PluginBaseであるとします
+
+// クロージャ―タスクで簡易記述 (RepeatingTask)
+use pocketmine\scheduler\ClosureTask;
+
+$player; // プレイヤーオブジェクト
+$plugin->getScheduler()->scheduleRepeatingTask(
+    new ClosureTask(
+        function(int $currentTick) use($player): void {
+            // リピートする処理
+            // 例: メッセージ送信
+            $player->sendMessage("繰り返してます");
+        }
+    ),
+    1 * 20
+);
+```
+
 <a name="comment"></a>
