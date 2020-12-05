@@ -342,12 +342,27 @@ if ($player->hasEffect(1)) {
 }
 ```
 
-#### エンティティが追いかけてくるコード
+#### エンティティ関係
 ```php
-(Entity) $entity->lookAt($player);
+// $entityはEntityオブジェクトであるとします。
+
+// エンティティが追いかけてくるコード
+$entity->lookAt($player);
 $moveX = sin(-deg2rad($entity->yaw)) * 0.5; //0.5はスピード
 $moveZ = cos(-deg2rad($entity->yaw)) * 0.5;
 $entity->move($moveX, 0, $moveZ);
+
+// 見ているブロックを取得
+$block = $entity->getTargetBlock(/*距離*/);
+
+// 大きさ変更
+$entity->setScale(/*0より大きい数値*/);
+
+// 操作不能、停止させる
+$entity->setImmobile(true);
+
+// ↑ 解除
+$entity->setImmobile(false);
 ```
 
 
