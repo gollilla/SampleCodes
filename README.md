@@ -6,6 +6,7 @@ pmmp sample code
 
 プルリク送ってください。
 
-  md.index を編集
+md.index を編集
+- マークダウンで記載してください
 
 <a href="https://gollilla.github.io/SampleCodes" target="_blank">公開はこちら</a>
